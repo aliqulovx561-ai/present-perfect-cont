@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Perfect Continuous Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .login-form, .test-container, .results-container {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question-number {
+            font-weight: 700;
+            color: #2575fc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option:hover {
+            border-color: #2575fc;
+            background-color: #f8faff;
+        }
+        
+        .option.selected {
+            border-color: #2575fc;
+            background-color: #e8f0ff;
+        }
+        
+        .option input {
+            margin-right: 10px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e1e1e1;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .results-container {
+            text-align: center;
+        }
+        
+        .score {
+            font-size: 72px;
+            font-weight: 700;
+            color: #2575fc;
+            margin: 20px 0;
+        }
+        
+        .score-text {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .results-details {
+            text-align: left;
+            background-color: #f8faff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        
+        .correct {
+            color: #2ecc71;
+        }
+        
+        .incorrect {
+            color: #e74c3c;
+        }
+        
+        .student-info {
+            background-color: #f8faff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .timer {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2575fc;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Present Perfect Continuous Test</h1>
+            <p>Test your knowledge of the present perfect continuous tense</p>
+        </div>
+        
+        <div class="content">
+            <!-- Login Form -->
+            <div id="loginForm" class="login-form active">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Enter your last name">
+                </div>
+                <button id="startTest" class="btn">Start Test</button>
+            </div>
+            
+            <!-- Test Container -->
+            <div id="testContainer" class="test-container">
+                <div class="student-info">
+                    Student: <span id="studentName"></span>
+                </div>
+                <div class="timer">
+                    Time: <span id="timer">45:00</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress" class="progress"></div>
+                </div>
+                
+                <div id="questionContainer">
+                    <!-- Questions will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="navigation">
+                    <button id="prevBtn" class="btn">Previous</button>
+                    <button id="nextBtn" class="btn">Next</button>
+                    <button id="submitTest" class="btn">Submit Test</button>
+                </div>
+            </div>
+            
+            <!-- Results Container -->
+            <div id="resultsContainer" class="results-container">
+                <h2>Test Results</h2>
+                <div class="student-info">
+                    Student: <span id="resultsStudentName"></span>
+                </div>
+                <div class="score" id="finalScore">0%</div>
+                <div class="score-text" id="scoreText">You can do better!</div>
+                
+                <div class="results-details" id="resultsDetails">
+                    <!-- Results will be inserted here by JavaScript -->
+                </div>
+                
+                <button id="restartTest" class="btn" style="margin-top: 20px;">Take Test Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Student information
+        let student = {
+            firstName: '',
+            lastName: ''
+        };
+        
+        // Test configuration
+        const totalQuestions = 25;
+        const timeLimit = 45 * 60; // 45 minutes in seconds
+        let timeLeft = timeLimit;
+        let timerInterval;
+        
+        // Test state
+        let currentQuestion = 0;
+        let answers = new Array(totalQuestions).fill(null);
+        let questions = [];
+        
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const testContainer = document.getElementById('testContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const startTestBtn = document.getElementById('startTest');
+        const studentNameSpan = document.getElementById('studentName');
+        const resultsStudentNameSpan = document.getElementById('resultsStudentName');
+        const questionContainer = document.getElementById('questionContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitTestBtn = document.getElementById('submitTest');
+        const finalScoreSpan = document.getElementById('finalScore');
+        const scoreTextSpan = document.getElementById('scoreText');
+        const resultsDetailsDiv = document.getElementById('resultsDetails');
+        const restartTestBtn = document.getElementById('restartTest');
+        const timerSpan = document.getElementById('timer');
+        const progressBar = document.getElementById('progress');
+        
+        // Initialize the test
+        function initTest() {
+            // Generate questions
+            questions = generateQuestions();
+            
+            // Display first question
+            displayQuestion(0);
+            
+            // Update progress bar
+            updateProgressBar();
+            
+            // Start timer
+            startTimer();
+        }
+        
+        // Generate questions for the test
+        function generateQuestions() {
+            return [
+                {
+                    question: "I __________ English for five years.",
+                    options: ["have been studying", "has been studying", "have studied", "has studied"],
+                    correct: 0
+                },
+                {
+                    question: "She __________ in the garden since morning.",
+                    options: ["has been working", "have been working", "has worked", "have worked"],
+                    correct: 0
+                },
+                {
+                    question: "They __________ TV for three hours.",
+                    options: ["has been watching", "have been watching", "has watched", "have watched"],
+                    correct: 1
+                },
+                {
+                    question: "How long __________ you __________ here?",
+                    options: ["has / been waiting", "have / been waiting", "has / waited", "have / waited"],
+                    correct: 1
+                },
+                {
+                    question: "He __________ for the company since 2010.",
+                    options: ["has been working", "have been working", "has worked", "have worked"],
+                    correct: 0
+                },
+                {
+                    question: "We __________ for the bus for over an hour.",
+                    options: ["has been waiting", "have been waiting", "has waited", "have waited"],
+                    correct: 1
+                },
+                {
+                    question: "It __________ since I arrived.",
+                    options: ["has been raining", "have been raining", "has rained", "have rained"],
+                    correct: 0
+                },
+                {
+                    question: "You __________ too much coffee lately.",
+                    options: ["has been drinking", "have been drinking", "has drunk", "have drunk"],
+                    correct: 1
+                },
+                {
+                    question: "The children __________ in the pool all afternoon.",
+                    options: ["has been swimming", "have been swimming", "has swum", "have swum"],
+                    correct: 1
+                },
+                {
+                    question: "My brother __________ for his exams all week.",
+                    options: ["has been studying", "have been studying", "has studied", "have studied"],
+                    correct: 0
+                },
+                {
+                    question: "I __________ to fix this computer for hours.",
+                    options: ["has been trying", "have been trying", "has tried", "have tried"],
+                    correct: 1
+                },
+                {
+                    question: "She __________ French since she was a child.",
+                    options: ["has been learning", "have been learning", "has learned", "have learned"],
+                    correct: 0
+                },
+                {
+                    question: "They __________ in this city for ten years.",
+                    options: ["has been living", "have been living", "has lived", "have lived"],
+                    correct: 1
+                },
+                {
+                    question: "He __________ a lot of progress recently.",
+                    options: ["has been making", "have been making", "has made", "have made"],
+                    correct: 0
+                },
+                {
+                    question: "We __________ each other since we were kids.",
+                    options: ["has been knowing", "have been knowing", "has known", "have known"],
+                    correct: 3
+                },
+                {
+                    question: "The students __________ for the test since last week.",
+                    options: ["has been preparing", "have been preparing", "has prepared", "have prepared"],
+                    correct: 1
+                },
+                {
+                    question: "I __________ to call you all day.",
+                    options: ["has been trying", "have been trying", "has tried", "have tried"],
+                    correct: 1
+                },
+                {
+                    question: "She __________ as a teacher for fifteen years.",
+                    options: ["has been working", "have been working", "has worked", "have worked"],
+                    correct: 0
+                },
+                {
+                    question: "They __________ to find a solution to the problem.",
+                    options: ["has been trying", "have been trying", "has tried", "have tried"],
+                    correct: 1
+                },
+                {
+                    question: "He __________ on this project for months.",
+                    options: ["has been working", "have been working", "has worked", "have worked"],
+                    correct: 0
+                },
+                {
+                    question: "We __________ for this moment our whole lives.",
+                    options: ["has been waiting", "have been waiting", "has waited", "have waited"],
+                    correct: 1
+                },
+                {
+                    question: "The company __________ new products recently.",
+                    options: ["has been developing", "have been developing", "has developed", "have developed"],
+                    correct: 0
+                },
+                {
+                    question: "I __________ a lot of books this year.",
+                    options: ["has been reading", "have been reading", "has read", "have read"],
+                    correct: 1
+                },
+                {
+                    question: "She __________ to improve her skills.",
+                    options: ["has been trying", "have been trying", "has tried", "have tried"],
+                    correct: 0
+                },
+                {
+                    question: "They __________ for a new house for six months.",
+                    options: ["has been looking", "have been looking", "has looked", "have looked"],
+                    correct: 1
+                }
+            ];
+        }
+        
+        // Display a question
+        function displayQuestion(index) {
+            const question = questions[index];
+            
+            let optionsHTML = '';
+            question.options.forEach((option, i) => {
+                const isSelected = answers[index] === i;
+                optionsHTML += `
+                    <div class="option ${isSelected ? 'selected' : ''}" onclick="selectOption(${i})">
+                        <input type="radio" name="option" ${isSelected ? 'checked' : ''}>
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            questionContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${index + 1} of ${totalQuestions}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">
+                        ${optionsHTML}
+                    </div>
+                </div>
+            `;
+            
+            // Update navigation buttons
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === totalQuestions - 1;
+            submitTestBtn.style.display = index === totalQuestions - 1 ? 'inline-block' : 'none';
+        }
+        
+        // Select an option
+        function selectOption(optionIndex) {
+            answers[currentQuestion] = optionIndex;
+            displayQuestion(currentQuestion);
+        }
+        
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion(currentQuestion);
+                updateProgressBar();
+            }
+        }
+        
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions - 1) {
+                currentQuestion++;
+                displayQuestion(currentQuestion);
+                updateProgressBar();
+            }
+        }
+        
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // Start the timer
+        function startTimer() {
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+        
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (timeLeft < 300) { // 5 minutes
+                timerSpan.style.color = '#e74c3c';
+            }
+        }
+        
+        // Submit the test
+        function submitTest() {
+            clearInterval(timerInterval);
+            
+            // Calculate score
+            let correctAnswers = 0;
+            let resultsHTML = '';
+            
+            for (let i = 0; i < totalQuestions; i++) {
+                const isCorrect = answers[i] === questions[i].correct;
+                if (isCorrect) correctAnswers++;
+                
+                resultsHTML += `
+                    <div class="result-item">
+                        <strong>Question ${i + 1}:</strong> ${questions[i].question}
+                        <br>
+                        Your answer: <span class="${isCorrect ? 'correct' : 'incorrect'}">${answers[i] !== null ? questions[i].options[answers[i]] : 'Not answered'}</span>
+                        <br>
+                        Correct answer: <span class="correct">${questions[i].options[questions[i].correct]}</span>
+                    </div>
+                `;
+            }
+            
+            const score = Math.round((correctAnswers / totalQuestions) * 100);
+            
+            // Display results
+            finalScoreSpan.textContent = `${score}%`;
+            resultsStudentNameSpan.textContent = `${student.firstName} ${student.lastName}`;
+            resultsDetailsDiv.innerHTML = resultsHTML;
+            
+            // Set score text
+            if (score >= 90) {
+                scoreTextSpan.textContent = 'Excellent work!';
+            } else if (score >= 70) {
+                scoreTextSpan.textContent = 'Good job!';
+            } else if (score >= 50) {
+                scoreTextSpan.textContent = 'Not bad, but you can improve.';
+            } else {
+                scoreTextSpan.textContent = 'You need more practice.';
+            }
+            
+            // Show results container
+            testContainer.classList.remove('active');
+            resultsContainer.classList.add('active');
+            
+            // Prepare data for Telegram notification (in a real app, this would be sent to a server)
+            const resultData = {
+                student: `${student.firstName} ${student.lastName}`,
+                score: score,
+                correctAnswers: correctAnswers,
+                totalQuestions: totalQuestions,
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('Test results:', resultData);
+            // In a real application, you would send this data to your server
+            // which would then send a message to Telegram
+        }
+        
+        // Restart the test
+        function restartTest() {
+            // Reset test state
+            currentQuestion = 0;
+            answers = new Array(totalQuestions).fill(null);
+            timeLeft = timeLimit;
+            
+            // Show login form
+            resultsContainer.classList.remove('active');
+            loginForm.classList.add('active');
+            
+            // Reset form
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+        }
+        
+        // Event listeners
+        startTestBtn.addEventListener('click', () => {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            
+            if (!firstName || !lastName) {
+                alert('Please enter both your first and last name.');
+                return;
+            }
+            
+            student.firstName = firstName;
+            student.lastName = lastName;
+            studentNameSpan.textContent = `${firstName} ${lastName}`;
+            
+            loginForm.classList.remove('active');
+            testContainer.classList.add('active');
+            
+            initTest();
+        });
+        
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitTestBtn.addEventListener('click', submitTest);
+        restartTestBtn.addEventListener('click', restartTest);
+    </script>
+</body>
+</html>
