@@ -1,0 +1,11 @@
+{
+  "name": "present-perfect-continuous-test",
+  "version": "1.0.0",
+  "description": "A test application for the present perfect continuous tense",
+  "scripts": {
+    "build": "mkdir -p public && cp index.html public/ && cp -r assets public/ 2>/dev/null || :"
+  },
+  "keywords": ["english", "grammar", "test", "education"],
+  "author": "Your Name",
+  "license": "MIT"
+}
